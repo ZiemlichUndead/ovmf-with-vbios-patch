@@ -4,11 +4,11 @@ DefinitionBlock ("Ssdt.aml", "SSDT", 1, "REDHAT", "OVMF2   ", 1) {
     External(\_SB.PCI0.FWCF, DeviceObj)
     External(\_SB.PCI0.FWCF._CRS, BuffObj)
 
-    Device (\_SB.PCI0.RP01) {
+    Device (\_SB.PCI0.S10_) {
         Name (_ADR, 0x00010000)
     }
 
-    Device (\_SB.PCI0.RP01.PEGP) {
+    Device (\_SB.PCI0.S10_.S00_) {
         Name (_ADR, Zero)
 
         /* ROML and ROMB not necessary here */
@@ -32,7 +32,7 @@ DefinitionBlock ("Ssdt.aml", "SSDT", 1, "REDHAT", "OVMF2   ", 1) {
     }
 
   /* define the ROM call */
-  Scope (\_SB.PCI0.RP01.PEGP)
+  Scope (\_SB.PCI0.S10_.S00_)
     {
         Name (RVBS, 103936) // size of ROM in bytes
 
@@ -70,7 +70,7 @@ DefinitionBlock ("Ssdt.aml", "SSDT", 1, "REDHAT", "OVMF2   ", 1) {
             // offset > size of ROM in bytes
             If (Local0 > RVBS)
             {
-                Return (VROM) /* \_SB_.PCI0.RP01.PEGP._ROM.VROM */
+                Return (VROM) /* \_SB_.PCI0.S10_.S00_._ROM.VROM */
             }
 
             // end position
@@ -89,41 +89,41 @@ DefinitionBlock ("Ssdt.aml", "SSDT", 1, "REDHAT", "OVMF2   ", 1) {
             // set Local5 to the right segment
             If (Local4 == 0)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS1
+                Local5 = \_SB.PCI0.S10_.S00_.VBS1
             }
             ElseIf (Local4 == 1)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS2
+                Local5 = \_SB.PCI0.S10_.S00_.VBS2
             }
             ElseIf (Local4 == 2)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS3
+                Local5 = \_SB.PCI0.S10_.S00_.VBS3
             }
             ElseIf (Local4 == 3)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS4
+                Local5 = \_SB.PCI0.S10_.S00_.VBS4
             }
             ElseIf (Local4 == 4)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS5
+                Local5 = \_SB.PCI0.S10_.S00_.VBS5
             }
             ElseIf (Local4 == 5)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS6
+                Local5 = \_SB.PCI0.S10_.S00_.VBS6
             }
             ElseIf (Local4 == 6)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS7
+                Local5 = \_SB.PCI0.S10_.S00_.VBS7
             }
             ElseIf (Local4 == 7)
             {
-                Local5 = \_SB.PCI0.RP01.PEGP.VBS8
+                Local5 = \_SB.PCI0.S10_.S00_.VBS8
             }
 
             // extract from the segment starting from offset Local3 of size Local1
             // from Local 5 and store into VROM
             Mid (Local5, Local3, Local1, VROM)
-            Return (VROM) /* \_SB_.PCI0.RP01.PEGP._ROM.VROM */
+            Return (VROM) /* \_SB_.PCI0.S10_.S00_._ROM.VROM */
         }
     }
 }
